@@ -6,6 +6,7 @@ import AdminSidebar from './AdminSidebar';
 import { surveyQuestions } from '../pages/SurveyQuestions';
 import api from '../api/api';
 import { useNotification } from '../components/NotificationProvider';
+import '../radiant.css';
 
 
 // Type for answers map
@@ -34,41 +35,43 @@ const AdminAnswers: React.FC = () => {
   }, [notify]);
 
   if (loading) {
-    return <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading answers...</div>;
+    return <div className="radiant-bg" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, color: 'var(--primary)', fontSize: 22 }}>Loading answers...</div>;
   }
   if (error) {
-    return <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'red' }}>{error}</div>;
+    return <div className="radiant-bg" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent)', fontWeight: 700, fontSize: 22 }}>{error}</div>;
   }
   return (
-    <div style={{ display: 'flex' }}>
+    <div className="radiant-bg" style={{ display: 'flex', minHeight: '100vh' }}>
       <AdminSidebar />
       <div style={{ marginLeft: 220, width: '100%', minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
         <div style={{ display: 'flex', justifyContent: 'flex-end', margin: '24px 32px 0 0' }}>
-          <Link to="/admin/login" style={{ color: '#1976d2', textDecoration: 'underline', fontWeight: 500 }}>Logout</Link>
+          <Link to="/admin/login" className="radiant-link">Logout</Link>
         </div>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: 32 }}>
-          <h1 style={{ marginBottom: 32 }}>Survey Answers</h1>
+        <div className="admin-card radiant-glass" style={{ maxWidth: 1200, margin: '0 auto', padding: 32, marginTop: 24, marginBottom: 24 }}>
+          <h1 className="radiant-title" style={{ marginBottom: 32 }}>Survey Answers</h1>
           {allAnswers.map((user, idx) => (
-            <div key={user.id} style={{ marginBottom: 40, background: '#fff', borderRadius: 8, boxShadow: '0 2px 8px #eee', padding: 24 }}>
-              <h3 style={{ color: '#1976d2', marginBottom: 16 }}>Participant {idx + 1}</h3>
-              <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-                <thead style={{ background: '#f5f5f5' }}>
-                  <tr>
-                    <th style={{ padding: 10, textAlign: 'left' }}>#</th>
-                    <th style={{ padding: 10, textAlign: 'left' }}>Question</th>
-                    <th style={{ padding: 10, textAlign: 'left' }}>Answer</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {surveyQuestions.map((q) => (
-                    <tr key={q.number} style={{ borderBottom: '1px solid #eee' }}>
-                      <td style={{ padding: 10 }}>{q.number}</td>
-                      <td style={{ padding: 10 }}>{q.text}</td>
-                      <td style={{ padding: 10 }}>{user.answers[q.number.toString()] || <span style={{ color: '#aaa' }}>No answer</span>}</td>
+            <div key={user.id} className="card radiant-glass" style={{ marginBottom: 40, padding: 24 }}>
+              <h3 style={{ color: 'var(--primary-dark)', marginBottom: 16 }}>Participant {idx + 1}</h3>
+              <div style={{ overflowX: 'auto' }}>
+                <table className="radiant-table" style={{ width: '100%', borderCollapse: 'collapse', background: 'var(--surface)', borderRadius: 16, overflow: 'hidden', boxShadow: '0 2px 8px var(--primary-dark)' }}>
+                  <thead style={{ background: 'linear-gradient(90deg, #e040fb 0%, #ff4081 100%)', color: '#fff' }}>
+                    <tr>
+                      <th style={{ padding: 12, textAlign: 'left' }}>#</th>
+                      <th style={{ padding: 12, textAlign: 'left' }}>Question</th>
+                      <th style={{ padding: 12, textAlign: 'left' }}>Answer</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {surveyQuestions.map((q) => (
+                      <tr key={q.number} style={{ borderBottom: '1px solid #f8bbd0' }}>
+                        <td style={{ padding: 10 }}>{q.number}</td>
+                        <td style={{ padding: 10 }}>{q.text}</td>
+                        <td style={{ padding: 10 }}>{user.answers[q.number.toString()] || <span style={{ color: '#aaa' }}>No answer</span>}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           ))}
         </div>

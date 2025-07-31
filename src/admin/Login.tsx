@@ -5,6 +5,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useNotification } from '../components/NotificationProvider';
 import api from '../api/api';
+import '../radiant.css';
 
 /**
  * Validation schema for admin login form
@@ -43,12 +44,12 @@ const AdminLogin: React.FC = () => {
   };
 
   return (
-    <div style={{ minHeight: '100vh', minWidth: '100vw', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #f8fafc 0%, #e3e9f3 100%)' }}>
-      <div className="admin-login-container" style={{ maxWidth: 400, width: '100%', padding: 32, border: '1px solid #eee', borderRadius: 8, boxShadow: '0 2px 16px #e0e7ef', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center', background: '#fff' }}>
-        <h1 style={{ textAlign: 'center', marginBottom: 24 }}>Admin Login</h1>
+    <div className="radiant-bg" style={{ minHeight: '100vh', minWidth: '100vw', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '32px 0' }}>
+      <div className="admin-login-container radiant-glass" style={{ maxWidth: 420, width: '100%', margin: '0 auto', padding: 36, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', boxSizing: 'border-box' }}>
+        <h1 className="radiant-title" style={{ marginBottom: 18 }}>Admin Login</h1>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 24, width: '100%', maxWidth: 340 }}>
-          <Link to="/" style={{ color: '#1976d2', textDecoration: 'underline' }}>Back to survey</Link>
-          <Link to="/answers/demo-token" style={{ color: '#1976d2', textDecoration: 'underline' }}>Consult answers</Link>
+          <Link to="/" className="radiant-link">Back to survey</Link>
+          <Link to="/answers/demo-token" className="radiant-link">Consult answers</Link>
         </div>
         <Formik
           initialValues={{ username: '', password: '' }}
@@ -56,22 +57,22 @@ const AdminLogin: React.FC = () => {
           onSubmit={handleSubmit}
         >
           {({ isSubmitting }) => (
-            <Form>
-              <div style={{ marginBottom: 18 }}>
-                <label htmlFor="username" style={{ display: 'block', marginBottom: 6 }}>Username</label>
-                <Field name="username" type="text" style={{ width: '100%', padding: 8, borderRadius: 4, border: '1px solid #ccc' }} />
-                <div style={{ color: 'red', fontSize: 12, marginTop: 4 }}>
+            <Form style={{ width: '100%' }}>
+              <div className="radiant-form-group" style={{ marginBottom: 22, textAlign: 'left' }}>
+                <label htmlFor="username" className="radiant-label" style={{ fontWeight: 700, color: 'var(--primary-dark)', marginBottom: 6, display: 'block' }}>Username</label>
+                <Field name="username" type="text" className="radiant-input" style={{ width: '100%' }} />
+                <div className="radiant-error" style={{ color: 'var(--accent)', fontSize: 13, marginTop: 2 }}>
                   <ErrorMessage name="username" />
                 </div>
               </div>
-              <div style={{ marginBottom: 18 }}>
-                <label htmlFor="password" style={{ display: 'block', marginBottom: 6 }}>Password</label>
-                <Field name="password" type="password" style={{ width: '100%', padding: 8, borderRadius: 4, border: '1px solid #ccc' }} />
-                <div style={{ color: 'red', fontSize: 12, marginTop: 4 }}>
+              <div className="radiant-form-group" style={{ marginBottom: 22, textAlign: 'left' }}>
+                <label htmlFor="password" className="radiant-label" style={{ fontWeight: 700, color: 'var(--primary-dark)', marginBottom: 6, display: 'block' }}>Password</label>
+                <Field name="password" type="password" className="radiant-input" style={{ width: '100%' }} />
+                <div className="radiant-error" style={{ color: 'var(--accent)', fontSize: 13, marginTop: 2 }}>
                   <ErrorMessage name="password" />
                 </div>
               </div>
-              <button type="submit" disabled={isSubmitting} style={{ width: '100%', padding: '12px 0', fontSize: 16, borderRadius: 6, background: '#1976d2', color: '#fff', border: 'none', cursor: 'pointer' }}>
+              <button type="submit" className="button radiant-btn" disabled={isSubmitting} style={{ width: '100%', marginTop: 18, fontSize: 18 }}>
                 {isSubmitting ? 'Logging in...' : 'Login'}
               </button>
             </Form>

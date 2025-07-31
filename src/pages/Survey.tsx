@@ -7,13 +7,14 @@ import { surveyQuestions } from './SurveyQuestions';
 import type { SurveyQuestion } from './SurveyQuestions';
 import { useNotification } from '../components/NotificationProvider';
 import api from '../api/api';
+import '../radiant.css';
 
 /**
  * Validation schema for the survey form using Yup.
  * All questions are required. Email is validated.
  */
 const validationSchema = Yup.object(
-  surveyQuestions.reduce((acc, q) => {
+  surveyQuestions.reduce((acc: Record<string, any>, q) => {
     if (q.number === 1) {
       acc[`q${q.number}`] = Yup.string()
         .email('Invalid email address')
@@ -26,18 +27,6 @@ const validationSchema = Yup.object(
     return acc;
   }, {} as Record<string, any>)
 );
-
-/**
- * Initial values for the survey form.
- */
-const initialValues = surveyQuestions.reduce((acc, q) => {
-  acc[`q${q.number}`] = '';
-  return acc;
-}, {} as Record<string, string>);
-
-/**
- * Survey form UI for Bigscreen
- */
 const Survey: React.FC = () => {
   /**
    * Handles form submission
@@ -61,60 +50,59 @@ const Survey: React.FC = () => {
   };
 
   return (
-    <div style={{ minHeight: '100vh', width: '100vw', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <div className="survey-container" style={{ maxWidth: 600, width: '100%', margin: '0 auto', padding: 24, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', boxSizing: 'border-box' }}>
-        <h1>Bigscreen Survey</h1>
+    <div className="survey-bg" style={{ minHeight: '100vh', width: '100vw', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '32px 0' }}>
+      <div className="survey-container radiant-glass" style={{ maxWidth: 600, width: '100%', margin: '0 auto', padding: 36, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', boxSizing: 'border-box' }}>
+        <h1 className="radiant-title" style={{ marginBottom: 18 }}>Bigscreen Survey</h1>
+        <div className="radiant-subtitle" style={{ marginBottom: 28, fontSize: 18 }}>
+          Please answer all questions. Your feedback is valuable!
+        </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 24, width: '100%', maxWidth: 500 }}>
-          <Link to="/answers/demo-token" style={{ color: '#1976d2', textDecoration: 'underline' }}>Consult your answers</Link>
-          <Link to="/admin/login" style={{ color: '#1976d2', textDecoration: 'underline' }}>Admin login</Link>
+          <Link to="/answers/demo-token" className="radiant-link">Consult your answers</Link>
+          <Link to="/admin/login" className="radiant-link">Admin login</Link>
         </div>
         <Formik
-          initialValues={initialValues}
+          initialValues={surveyQuestions.reduce((acc, q) => { acc[`q${q.number}`] = ''; return acc; }, {} as any)}
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
           {({ isSubmitting }) => (
-            <Form style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+            <Form style={{ width: '100%' }}>
               {surveyQuestions.map((q: SurveyQuestion) => (
-                <div key={q.number} style={{ marginBottom: 24, border: '1px dashed #bbb', borderRadius: 8, padding: 16, width: '100%', maxWidth: 420, background: '#fafcff', boxShadow: '0 2px 12px 0 rgba(25,118,210,0.06)' }}>
-                  <div style={{ fontWeight: 600, marginBottom: 8, textAlign: 'center' }}>
-                    Question {q.number}/20
-                  </div>
-                  <div style={{ marginBottom: 8, textAlign: 'center' }}>{q.text}</div>
-                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                    {q.type === 'A' && q.choices && (
-                      <div style={{ width: '100%' }}>
-                        {q.choices.map((choice, i) => (
-                          <label key={i} style={{ display: 'block', marginBottom: 4, textAlign: 'left' }}>
-                            <Field type="radio" name={`q${q.number}`} value={choice} /> {choice}
-                          </label>
-                        ))}
-                      </div>
-                    )}
-                    {q.type === 'B' && (
-                      <Field
-                        type="text"
-                        name={`q${q.number}`}
-                        maxLength={255}
-                        style={{ width: '100%', padding: 8, borderRadius: 4, border: '1.5px solid #ccc', textAlign: 'center' }}
-                      />
-                    )}
-                    {q.type === 'C' && (
-                      <Field as="select" name={`q${q.number}`} style={{ width: '100%', padding: 8, borderRadius: 4, border: '1.5px solid #ccc', textAlign: 'center' }}>
-                        <option value="">Select a value</option>
-                        {[1, 2, 3, 4, 5].map((n) => (
-                          <option key={n} value={n}>{n}</option>
-                        ))}
-                      </Field>
-                    )}
-                    <div style={{ color: 'red', fontSize: 12, marginTop: 4, textAlign: 'center' }}>
-                      <ErrorMessage name={`q${q.number}`} />
+                <div key={q.number} className="radiant-form-group" style={{ marginBottom: 22, textAlign: 'left', background: 'var(--glass)', borderRadius: 16, boxShadow: '0 2px 12px 0 rgba(224,64,251,0.08)', padding: 18 }}>
+                  <div className="radiant-label" style={{ fontWeight: 700, color: 'var(--primary-dark)', marginBottom: 6, fontSize: 16 }}>Q{q.number}: {q.text}</div>
+                  {q.type === 'A' && q.choices && (
+                    <div style={{ width: '100%', display: 'flex', flexWrap: 'wrap', gap: 10 }}>
+                      {q.choices.map((choice, i) => (
+                        <label key={i} style={{ display: 'flex', alignItems: 'center', gap: 6, fontWeight: 500, color: 'var(--primary)' }}>
+                          <Field type="radio" name={`q${q.number}`} value={choice} className="radiant-radio" /> {choice}
+                        </label>
+                      ))}
                     </div>
+                  )}
+                  {q.type === 'B' && (
+                    <Field
+                      type="text"
+                      name={`q${q.number}`}
+                      maxLength={255}
+                      className="radiant-input"
+                      style={{ width: '100%', marginTop: 6 }}
+                    />
+                  )}
+                  {q.type === 'C' && (
+                    <Field as="select" name={`q${q.number}`} className="radiant-input" style={{ width: '100%', marginTop: 6 }}>
+                      <option value="">Select a value</option>
+                      {[1, 2, 3, 4, 5].map((n) => (
+                        <option key={n} value={n}>{n}</option>
+                      ))}
+                    </Field>
+                  )}
+                  <div className="radiant-error" style={{ color: 'var(--accent)', fontSize: 13, marginTop: 2 }}>
+                    <ErrorMessage name={`q${q.number}`} />
                   </div>
                 </div>
               ))}
-              <button type="submit" disabled={isSubmitting} style={{ padding: '12px 32px', fontSize: 16, borderRadius: 6, background: '#1976d2', color: '#fff', border: 'none', cursor: 'pointer', margin: '0 auto' }}>
-                Finalize
+              <button type="submit" className="button radiant-btn" disabled={isSubmitting} style={{ width: '100%', marginTop: 18, fontSize: 18 }}>
+                {isSubmitting ? 'Submitting...' : 'Submit'}
               </button>
             </Form>
           )}

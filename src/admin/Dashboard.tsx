@@ -14,6 +14,7 @@ import {
 } from 'chart.js';
 import api from '../api/api';
 import { useNotification } from '../components/NotificationProvider';
+import '../radiant.css';
 
 ChartJS.register(ArcElement, Tooltip, Legend, RadialLinearScale, PointElement, LineElement, Filler);
 
@@ -53,36 +54,36 @@ const AdminDashboard: React.FC = () => {
   }, [notify]);
 
   if (loading) {
-    return <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading statistics...</div>;
+    return <div className="radiant-bg" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, color: 'var(--primary)', fontSize: 22 }}>Loading statistics...</div>;
   }
   if (error) {
-    return <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'red' }}>{error}</div>;
+    return <div className="radiant-bg" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent)', fontWeight: 700, fontSize: 22 }}>{error}</div>;
   }
   return (
-    <div style={{ display: 'flex' }}>
+    <div className="radiant-bg" style={{ display: 'flex', minHeight: '100vh' }}>
       <AdminSidebar />
       <div style={{ marginLeft: 220, width: '100%', minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
         <div style={{ display: 'flex', justifyContent: 'flex-end', margin: '24px 32px 0 0' }}>
-          <Link to="/admin/login" style={{ color: '#1976d2', textDecoration: 'underline', fontWeight: 500 }}>Logout</Link>
+          <Link to="/admin/login" className="radiant-link">Logout</Link>
         </div>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: 32 }}>
-          <h1 style={{ marginBottom: 32 }}>Admin Dashboard</h1>
-          <div style={{ display: 'flex', gap: 32, flexWrap: 'wrap', marginBottom: 48 }}>
-            <div style={{ flex: 1, minWidth: 300 }}>
-              <h3>VR Headset Usage (Q6)</h3>
+        <div className="admin-card radiant-glass" style={{ maxWidth: 1200, margin: '0 auto', padding: 32, marginTop: 24, marginBottom: 24 }}>
+          <h1 className="radiant-title" style={{ marginBottom: 32 }}>Admin Dashboard</h1>
+          <div style={{ display: 'flex', gap: 32, flexWrap: 'wrap', marginBottom: 48, justifyContent: 'center' }}>
+            <div className="card radiant-glass" style={{ flex: 1, minWidth: 300, margin: 8, padding: 18 }}>
+              <h3 style={{ color: 'var(--primary-dark)', marginBottom: 12 }}>VR Headset Usage (Q6)</h3>
               <Pie data={pieDataQ6} />
             </div>
-            <div style={{ flex: 1, minWidth: 300 }}>
-              <h3>VR App Store (Q7)</h3>
+            <div className="card radiant-glass" style={{ flex: 1, minWidth: 300, margin: 8, padding: 18 }}>
+              <h3 style={{ color: 'var(--primary-dark)', marginBottom: 12 }}>VR App Store (Q7)</h3>
               <Pie data={pieDataQ7} />
             </div>
-            <div style={{ flex: 1, minWidth: 300 }}>
-              <h3>Main Usage (Q10)</h3>
+            <div className="card radiant-glass" style={{ flex: 1, minWidth: 300, margin: 8, padding: 18 }}>
+              <h3 style={{ color: 'var(--primary-dark)', marginBottom: 12 }}>Main Usage (Q10)</h3>
               <Pie data={pieDataQ10} />
             </div>
           </div>
-          <div style={{ maxWidth: 600, margin: '0 auto' }}>
-            <h3>Quality Scores (Q11–Q15)</h3>
+          <div className="card radiant-glass" style={{ maxWidth: 600, margin: '0 auto', padding: 18 }}>
+            <h3 style={{ color: 'var(--primary-dark)', marginBottom: 12 }}>Quality Scores (Q11–Q15)</h3>
             <Radar data={radarData} />
           </div>
         </div>

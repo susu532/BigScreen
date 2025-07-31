@@ -1,0 +1,102 @@
+/* radiant.css - Vibrant pink-violet radiant theme for Bigscreen Survey */
+:root {
+  --primary: #e040fb;
+  --primary-dark: #8e24aa;
+  --accent: #ff4081;
+  --bg-gradient: linear-gradient(135deg, #f8bbd0 0%, #ce93d8 50%, #e040fb 100%);
+  --surface: rgba(255,255,255,0.85);
+  --glass: rgba(255,255,255,0.35);
+  --shadow: 0 8px 32px 0 rgba(224,64,251,0.18), 0 3px 12px 0 rgba(255,64,129,0.10);
+  --radius: 22px;
+  --transition: 0.25s cubic-bezier(.4,0,.2,1);
+  --text-main: #3a006a;
+  --text-accent: #e040fb;
+  --text-light: #fff;
+}
+
+body {
+  background: var(--bg-gradient);
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  color: var(--text-main);
+  margin: 0;
+  min-height: 100vh;
+  transition: background 0.5s;
+}
+
+h1, h2, h3 {
+  font-weight: 800;
+  letter-spacing: -1px;
+  color: var(--primary-dark);
+}
+
+.survey-container, .answers-container, .admin-login-container, .admin-card, .card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
+  animation: fadeInUp 0.7s var(--transition);
+}
+
+.card, .admin-card {
+  transition: box-shadow var(--transition), transform var(--transition);
+  will-change: transform;
+}
+.card:hover, .admin-card:hover {
+  box-shadow: 0 12px 48px 0 rgba(224,64,251,0.28), 0 6px 24px 0 rgba(255,64,129,0.18);
+  transform: translateY(-4px) scale(1.03);
+}
+
+button, .button {
+  background: linear-gradient(90deg, #e040fb 0%, #ff4081 100%);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 36px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  box-shadow: 0 2px 12px 0 rgba(224,64,251,0.12);
+  cursor: pointer;
+  transition: background var(--transition), box-shadow var(--transition), transform var(--transition);
+}
+button:hover, .button:hover {
+  background: linear-gradient(90deg, #ff4081 0%, #e040fb 100%);
+  box-shadow: 0 8px 32px 0 rgba(224,64,251,0.22);
+  transform: translateY(-2px) scale(1.04);
+}
+
+input, select, textarea {
+  border: 2px solid #f8bbd0;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 1.05rem;
+  background: var(--glass);
+  color: var(--text-main);
+  transition: border-color var(--transition), box-shadow var(--transition);
+  box-shadow: 0 1px 4px 0 rgba(224,64,251,0.08);
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--primary);
+  outline: none;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color var(--transition);
+}
+a:hover {
+  color: var(--primary-dark);
+}
+
+nav, aside {
+  background: var(--glass);
+  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+  backdrop-filter: blur(8px);
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
