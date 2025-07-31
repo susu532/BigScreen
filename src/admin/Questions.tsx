@@ -21,12 +21,13 @@ const AdminQuestions: React.FC = () => {
       .then((res: any) => {
         setQuestions(res.data.questions);
         notify('Questions loaded!', 'success');
+        setLoading(false);
       })
       .catch(() => {
         setError('Failed to load questions');
         notify('Failed to load questions', 'error');
-      })
-      .finally(() => setLoading(false));
+        setLoading(false);
+      });
   }, [notify]);
 
   if (loading) {

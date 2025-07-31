@@ -24,12 +24,13 @@ const AdminAnswers: React.FC = () => {
       .then((res: any) => {
         setAllAnswers(res.data.answers);
         notify('Answers loaded successfully!', 'success');
+        setLoading(false);
       })
       .catch(() => {
         setError('Failed to load answers');
         notify('Failed to load answers', 'error');
-      })
-      .finally(() => setLoading(false));
+        setLoading(false);
+      });
   }, [notify]);
 
   if (loading) {

@@ -43,12 +43,13 @@ const AdminDashboard: React.FC = () => {
         setPieDataQ10(res.data.pieDataQ10);
         setRadarData(res.data.radarData);
         notify('Statistics loaded!', 'success');
+        setLoading(false);
       })
       .catch(() => {
         setError('Failed to load statistics');
         notify('Failed to load statistics', 'error');
-      })
-      .finally(() => setLoading(false));
+        setLoading(false);
+      });
   }, [notify]);
 
   if (loading) {
