@@ -48,8 +48,7 @@ const AdminLogin: React.FC = () => {
       <div className="admin-login-container radiant-glass" style={{ maxWidth: 420, width: '100%', margin: '0 auto', padding: 36, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', boxSizing: 'border-box' }}>
         <h1 className="radiant-title" style={{ marginBottom: 18 }}>Admin Login</h1>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 24, width: '100%', maxWidth: 340 }}>
-          <Link to="/" className="radiant-link">Back to survey</Link>
-          <Link to="/answers/demo-token" className="radiant-link">Consult answers</Link>
+         
         </div>
         <Formik
           initialValues={{ username: '', password: '' }}

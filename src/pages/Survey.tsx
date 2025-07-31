@@ -58,7 +58,7 @@ const Survey: React.FC = () => {
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 24, width: '100%', maxWidth: 500 }}>
           <Link to="/answers/demo-token" className="radiant-link">Consult your answers</Link>
-          <Link to="/admin/login" className="radiant-link">Admin login</Link>
+          
         </div>
         <Formik
           initialValues={surveyQuestions.reduce((acc, q) => { acc[`q${q.number}`] = ''; return acc; }, {} as any)}
