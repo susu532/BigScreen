@@ -31,7 +31,7 @@ const AdminLogin: React.FC = () => {
   const navigate = useNavigate();
   const handleSubmit = async (values: { username: string; password: string }, { setSubmitting }: { setSubmitting: (b: boolean) => void }) => {
     try {
-      const response = await api.post('/admin/login', values);
+      await api.post('/admin/login', values);
       notify('Login successful!', 'success');
       // Optionally store token/session here
       navigate('/admin/dashboard');

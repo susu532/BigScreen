@@ -21,7 +21,7 @@ const AdminAnswers: React.FC = () => {
     setLoading(true);
     setError(null);
     api.get('/admin/answers')
-      .then(res => {
+      .then((res: any) => {
         setAllAnswers(res.data.answers);
         notify('Answers loaded successfully!', 'success');
       })

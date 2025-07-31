@@ -37,7 +37,7 @@ const AdminDashboard: React.FC = () => {
     setLoading(true);
     setError(null);
     api.get('/admin/statistics')
-      .then(res => {
+      .then((res: any) => {
         setPieDataQ6(res.data.pieDataQ6);
         setPieDataQ7(res.data.pieDataQ7);
         setPieDataQ10(res.data.pieDataQ10);

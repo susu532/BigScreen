@@ -18,7 +18,7 @@ const AdminQuestions: React.FC = () => {
     setLoading(true);
     setError(null);
     api.get('/admin/questions')
-      .then(res => {
+      .then((res: any) => {
         setQuestions(res.data.questions);
         notify('Questions loaded!', 'success');
       })

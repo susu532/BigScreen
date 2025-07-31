@@ -30,7 +30,7 @@ const Answers: React.FC = () => {
     setLoading(true);
     setError(null);
     api.get(`/answers/${token}`)
-      .then(res => {
+      .then((res: any) => {
         setAnswers(res.data.answers);
         notify('Answers loaded successfully!', 'success');
       })

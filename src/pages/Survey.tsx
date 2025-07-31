@@ -49,7 +49,7 @@ const Survey: React.FC = () => {
    */
   const handleSubmit = async (values: Record<string, string>, { setSubmitting, resetForm }: any) => {
     try {
-      const response = await api.post('/survey', values);
+      await api.post('/survey', values);
       notify('Thank you for your answers!', 'success');
       // Optionally: redirect or show token from response.data.token
       resetForm();
