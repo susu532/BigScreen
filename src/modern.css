@@ -1,0 +1,104 @@
+/* modern.css - Modern, seamless, animated UI for Bigscreen Survey */
+:root {
+  --primary: #1976d2;
+  --primary-dark: #115293;
+  --accent: #fbc02d;
+  --bg: #f4f7fa;
+  --surface: #fff;
+  --shadow: 0 4px 24px 0 rgba(25, 118, 210, 0.08), 0 1.5px 6px 0 rgba(0,0,0,0.04);
+  --radius: 18px;
+  --transition: 0.25s cubic-bezier(.4,0,.2,1);
+}
+
+body {
+  background: var(--bg);
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  color: #222;
+  margin: 0;
+  min-height: 100vh;
+}
+
+h1, h2, h3 {
+  font-weight: 700;
+  letter-spacing: -1px;
+}
+
+.survey-container, .answers-container, .admin-login-container {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  animation: fadeInUp 0.7s var(--transition);
+}
+
+.card, .admin-card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: box-shadow var(--transition), transform var(--transition);
+  will-change: transform;
+}
+
+.card:hover, .admin-card:hover {
+  box-shadow: 0 8px 32px 0 rgba(25, 118, 210, 0.16), 0 3px 12px 0 rgba(0,0,0,0.08);
+  transform: translateY(-4px) scale(1.02);
+}
+
+button, .button {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 32px;
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: 0 2px 8px 0 rgba(25, 118, 210, 0.10);
+  cursor: pointer;
+  transition: background var(--transition), box-shadow var(--transition), transform var(--transition);
+}
+button:hover, .button:hover {
+  background: var(--primary-dark);
+  box-shadow: 0 6px 24px 0 rgba(25, 118, 210, 0.18);
+  transform: translateY(-2px) scale(1.03);
+}
+
+input, select, textarea {
+  border: 1.5px solid #dbeafe;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 1rem;
+  background: #f8fafc;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  box-shadow: 0 1px 3px 0 rgba(25, 118, 210, 0.04);
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--primary);
+  outline: none;
+  box-shadow: 0 0 0 2px var(--primary), 0 1px 6px 0 rgba(25, 118, 210, 0.10);
+}
+
+nav, aside {
+  background: linear-gradient(135deg, var(--primary) 80%, var(--accent) 100%);
+  box-shadow: var(--shadow);
+  border-radius: 0 0 var(--radius) var(--radius);
+  animation: fadeInDown 0.7s var(--transition);
+}
+
+.admin-sidebar {
+  background: linear-gradient(135deg, #222 80%, var(--primary) 100%);
+  box-shadow: var(--shadow);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  animation: fadeInLeft 0.7s var(--transition);
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-40px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-40px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
